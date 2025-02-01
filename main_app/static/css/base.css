@@ -1,0 +1,23 @@
+:root{
+  --black: #000000;
+  --white: #f0f8ff;
+  --gray: #989898;
+  --background: #2b2b2c;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+body{
+  background-color: var(--background);
+  padding: 0 16px 16px;
+}
+
+a{
+  text-decoration: none;
+}
+
+ul{
+  list-style-type: none;
+}

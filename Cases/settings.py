@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'Cases.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',  # Correct engine for PostgreSQL
         'NAME': 'Cases',
+        'USER': 'postgres',
+        'PASSWORD': 'c.mell33p',
+        'HOST': 'localhost',  # Make sure PostgreSQL is running locally
+        'PORT': '5432',
     }
 }
 
@@ -117,6 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
