@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 # ref: https://www.geeksforgeeks.org/django-model-data-types-and-fields-list/
 
 class Crime(models.Model):
@@ -13,3 +14,7 @@ class Crime(models.Model):
 
   def __str__(self):
     return self.title
+  
+  def get_absolute_url(self):
+    # Use the 'reverse' function to dynamically find the URL for viewing this cat's details
+    return reverse('case-details', kwargs={'crime_id': self.id})

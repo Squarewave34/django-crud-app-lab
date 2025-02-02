@@ -16,4 +16,7 @@
   <p> this crime was closed without a conclusion</p>
 {% endif %}
 
+<a href='{% url 'case-update' crime.id %}'> edit </a>
+<a href='{% url 'case-delete' crime.id %}'> delete </a>
+
 {% endblock %}
