@@ -5,13 +5,15 @@
 <section class='section'>
   <div class="flexSpaceAround maxWidth">
     {% for crime in crimes|slice:":5" %}
-    <div class="flex">
-      <div class="card">
-        <h2>{{ crime.title }}</h2>
-        <p><small>{{ crime.description }}</small></p>
-      </div>
-    </div>
-  {% endfor %}
+      <a href='{% url 'case-details' crime.id %}'>
+        <div class="flex">
+          <div class="card">
+            <h2>{{ crime.title }}</h2>
+            <p><small>{{ crime.description }}</small></p>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
   </div>
   <a class='margin button' id='more' href="/cases">view more</a>
 

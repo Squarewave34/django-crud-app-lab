@@ -4,10 +4,12 @@
 <div class="grid maxWidth">
   {% for crime in crimes %}
   <div class="flex">
-    <div class="cardLight">
-      <h2>{{ crime.title }}</h2>
-      <p><small>{{ crime.description }}</small></p>
-    </div>
+    <a href='{% url 'case-details' crime.id %}'>
+      <div class="cardLight">
+        <h2>{{ crime.title }}</h2>
+        <p><small>{{ crime.description }}</small></p>
+      </div>
+    </a>
   </div>
 {% endfor %}
 </div>

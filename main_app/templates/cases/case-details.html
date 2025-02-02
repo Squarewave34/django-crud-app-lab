@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1> {{crime.title}} </h1>
+<br>
+<h2> {{crime.location}} </h2>
+<h2> {{crime.date}} </h2>
+<br>
+<p> {{crime.description}} </p>
+<p> {{crime.victims}} </p>
+
+{% if crime.open == True %}
+  <p> this crime is still open </p>
+{% elif crime.open == False and crime.successful == True%}
+  <p> this crime was successfully solved</p>
+{% else %}
+  <p> this crime was closed without a conclusion</p>
+{% endif %}
+
+{% endblock %}
