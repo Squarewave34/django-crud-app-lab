@@ -2,21 +2,26 @@
 {% comment %} ref: https://docs.djangoproject.com/en/5.1/ref/templates/builtins {% endcomment %}
 
 {% block content %}
-<section class='section'>
-  <div class="flexSpaceAround maxWidth">
-    {% for crime in crimes|slice:":5" %}
-      <a href='{% url 'case-details' crime.id %}'>
-        <div class="flex">
-          <div class="card">
-            <h2>{{ crime.title }}</h2>
-            <p><small>{{ crime.description }}</small></p>
+
+{% if crimes %}
+  <section class='section'>
+    <div class="flexSpaceAround maxWidth">
+      {% for crime in crimes|slice:":5" %}
+        <a href='{% url 'case-details' crime.id %}'>
+          <div class="flex">
+            <div class="card">
+              <h2>{{ crime.title }}</h2>
+              <p><small>{{ crime.description }}</small></p>
+            </div>
           </div>
-        </div>
-      </a>
-    {% endfor %}
-  </div>
-  <a class='margin button' id='more' href="/cases">view more</a>
-</section>
+        </a>
+      {% endfor %}
+    </div>
+    <a class='margin button' id='more' href="/cases">view more</a>
+  </section>
+{% else %}
+  <h1>There are no recoded cases</h1>
+{% endif %}
 
 <a href='{% url 'case-create' %}'>add a case</a>
 {% endblock %}

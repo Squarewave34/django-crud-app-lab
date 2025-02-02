@@ -7,7 +7,20 @@
 <br>
 <p> {{crime.description}} </p>
 <p> {{crime.victims}} </p>
+<br>
+<h2> the victims are: </h2>
+{% for victim in crime.victim_set.all %}
+  <p> {{victim.name }} who's {{victim.age }} years old </p>
+{% endfor %}
 
+<h3>Add a victim</h3>
+<form action='{% url 'add-victim' crime.id %}' method="post" autocomplete="off">
+  {% csrf_token %} 
+  {{ victims.as_p }}
+  <button type="submit">Add</button>
+</form>
+
+<br>
 {% if crime.open == True %}
   <p> this crime is still open </p>
 {% elif crime.open == False and crime.successful == True%}

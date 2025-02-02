@@ -7,7 +7,6 @@ class Crime(models.Model):
   location = models.CharField(max_length=100)
   description = models.TextField(max_length=250)
   date = models.DateField()
-  victims = models.TextField(max_length=500)
   open = models.BooleanField()
   successful = models.BooleanField()
   responsibility_of = models.CharField(max_length=100)
@@ -18,3 +17,13 @@ class Crime(models.Model):
   def get_absolute_url(self):
     # Use the 'reverse' function to dynamically find the URL for viewing this cat's details
     return reverse('case-details', kwargs={'crime_id': self.id})
+  
+
+class Victim(models.Model):
+  name = models.CharField(max_length=100)
+  age = models.IntegerField()
+
+  crime = models.ForeignKey(Crime, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.name

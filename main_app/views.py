@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from main_app.models import Crime
+from .forms import VictimsForm
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -14,7 +15,8 @@ def cases(req):
 
 def case_details(req, crime_id):
   crime = Crime.objects.get(id=crime_id)
-  return render(req, 'cases/case-details.html', {'crime': crime})
+  victims = VictimsForm()
+  return render(req, 'cases/case-details.html', {'crime': crime, 'victims': victims})
 
 class CaseCreate(CreateView):
   model = Crime
@@ -28,9 +30,11 @@ class CaseDelete(DeleteView):
   model = Crime
   success_url = '/cases/'
 
-
-def criminals(req):
-  return render(req, 'all-criminals.html')
-
-def criminal_details(req):
-  return render(req, 'criminal-details.html')
+def add_victim(request, crime_id):
+  form = VictimsForm(request.POST)
+  # validate the form
+  if form.is_valid():
+    new_victim= form.save(commit=False)
+    new_victim.crime_id = crime_id
+    new_victim.save()
+  return redirect('case-details', crime_id=crime_id)
