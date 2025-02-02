@@ -17,11 +17,22 @@
         </a>
       {% endfor %}
     </div>
-    <a class='margin button' id='more' href="/cases">view more</a>
   </section>
 {% else %}
   <h1>There are no recoded cases</h1>
 {% endif %}
 
+<a class='margin button' id='more' href="/cases">view more</a>
 <a href='{% url 'case-create' %}'>add a case</a>
+
+{% if not user.is_authenticated %}
+  <section>
+    <form action="{% url 'home' %}" method="post" class="login">
+      <h1>Login</h1>
+      {% csrf_token %} {{ form.as_p }}
+      <input type="hidden" name="next" value="{{ next }}" />
+      <button type="submit">Login</button>
+    </form>
+  </section>
+{% endif %}
 {% endblock %}

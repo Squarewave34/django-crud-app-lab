@@ -26,10 +26,22 @@
         <img src="{% static 'images/icon.svg' %}" alt="The Cat Collector Logo" id='header_icon'/>
       </a>
       <nav>
-        <ul class='flex'>
-          <li><a class='margin button' href="/about">Current Assignment</a></li>
-          <li><a class='margin button' href="/">logOut</a></li>
-        </ul>
+        {% if user.is_authenticated %}
+          <ul class='flex'>
+            <li><a class='margin button' href="/about">Current Assignment</a></li>
+            <li><a class='margin button' href="/">logOut</a></li>
+            <li>
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Log out</button>
+              </form>
+            </li>
+          </ul>
+        {% else %}
+          <ul>
+            <li><a class='margin button' href="{% url 'signup' %}">Sign Up</a></li>
+          </ul>
+        {% endif %}
       </nav>
     </header>
     <hr />
